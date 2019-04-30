@@ -7,9 +7,10 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install \
         intl \
         opcache \
+        pdo_mysql \
     && docker-php-ext-enable \
         intl \
-        opcache \
+        pdo_mysql \
     && curl -s https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer
