@@ -3,15 +3,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
- * User
- *
+ * @ORM\Entity
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var int
@@ -20,41 +18,7 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true, unique=true)
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255, nullable=true)
-     */
-    private $username;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max=4096)
-     */
-    private $plainPassword;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=true)
-     */
-    private $password;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="fb_token", type="string", length=255, nullable=true)
-     */
-    private $fbToken;
+    protected $id;
 
     /**
      * @var string
@@ -62,7 +26,6 @@ class User
      * @ORM\Column(name="nickname", type="string", length=255, nullable=true)
      */
     private $nickname;
-
 
     /**
      * Get id
@@ -72,126 +35,6 @@ class User
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Set plainPassword
-     *
-     * @param string $plainPassword
-     *
-     * @return User
-     */
-    public function setPlainPassword($plainPassword)
-    {
-        $this->plainPassword = $plainPassword;
-
-        return $this;
-    }
-
-    /**
-     * Get plainPassword
-     *
-     * @return string
-     */
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set fbToken
-     *
-     * @param string $fbToken
-     *
-     * @return User
-     */
-    public function setFbToken($fbToken)
-    {
-        $this->fbToken = $fbToken;
-
-        return $this;
-    }
-
-    /**
-     * Get fbToken
-     *
-     * @return string
-     */
-    public function getFbToken()
-    {
-        return $this->fbToken;
     }
 
     /**
@@ -218,4 +61,3 @@ class User
         return $this->nickname;
     }
 }
-
