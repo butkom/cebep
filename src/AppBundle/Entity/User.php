@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -26,6 +27,20 @@ class User extends BaseUser
      * @ORM\Column(name="nickname", type="string", length=255, nullable=true)
      */
     private $nickname;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Player", mappedBy="user")
+     */
+    private $players;
+
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->players = new ArrayCollection();
+    }
+
 
     /**
      * Get id
