@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<title>PlayerChamp index</title>
+
+{% block body %}
+    <h1>PlayerChamp index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for player_champ in player_champs %}
+            <tr>
+                <td>{{ player_champ.id }}</td>
+                <td>{{ player_champ.date ? player_champ.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('player_champ_show', {'id': player_champ.id}) }}">show</a>
+                    <a href="{{ path('player_champ_edit', {'id': player_champ.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('player_champ_new') }}">Create new</a>
+{% endblock %}

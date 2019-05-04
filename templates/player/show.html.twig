@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<title>Player</title>
+
+{% block body %}
+    <h1>Player</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ player.id }}</td>
+            </tr>
+            <tr>
+                <th>InGameId</th>
+                <td>{{ player.inGameId }}</td>
+            </tr>
+            <tr>
+                <th>Characteristic</th>
+                <td>{{ player.characteristic }}</td>
+            </tr>
+            <tr>
+                <th>AbsentDays</th>
+                <td>{{ player.absentDays }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('player_index') }}">back to list</a>
+
+    <a href="{{ path('player_edit', {'id': player.id}) }}">edit</a>
+
+    {{ include('player/_delete_form.html.twig') }}
+{% endblock %}

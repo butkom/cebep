@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<title>PlayerLvl index</title>
+
+{% block body %}
+    <h1>PlayerLvl index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Lvl</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for player_lvl in player_lvls %}
+            <tr>
+                <td>{{ player_lvl.id }}</td>
+                <td>{{ player_lvl.lvl }}</td>
+                <td>{{ player_lvl.date ? player_lvl.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('player_lvl_show', {'id': player_lvl.id}) }}">show</a>
+                    <a href="{{ path('player_lvl_edit', {'id': player_lvl.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('player_lvl_new') }}">Create new</a>
+{% endblock %}

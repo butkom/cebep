@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<title>New PlayerLvl</title>
+
+{% block body %}
+    <h1>Create new PlayerLvl</h1>
+
+    {{ include('player_lvl/_form.html.twig') }}
+
+    <a href="{{ path('player_lvl_index') }}">back to list</a>
+{% endblock %}

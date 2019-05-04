@@ -1,6 +1,7 @@
 <?php
 
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
+use Symfony\Bundle\WebServerBundle\WebServerBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -30,6 +31,7 @@ class AppKernel extends Kernel
             if ('dev' === $this->getEnvironment()) {
                 $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
                 $bundles[] = new Symfony\Bundle\WebServerBundle\WebServerBundle();
+                $bundles[] = new Symfony\Bundle\MakerBundle\MakerBundle();
             }
         }
 
