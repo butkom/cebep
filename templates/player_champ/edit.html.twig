@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit PlayerChamp</title>
+
+{% block body %}
+    <h1>Edit PlayerChamp</h1>
+
+    {{ include('player_champ/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('player_champ_index') }}">back to list</a>
+
+    {{ include('player_champ/_delete_form.html.twig') }}
+{% endblock %}

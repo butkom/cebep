@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<title>Champ</title>
+
+{% block body %}
+    <h1>Champ</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ champ.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ champ.date ? champ.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Comment</th>
+                <td>{{ champ.comment }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('champ_index') }}">back to list</a>
+
+    <a href="{{ path('champ_edit', {'id': champ.id}) }}">edit</a>
+
+    {{ include('champ/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit PlayerLvl</title>
+
+{% block body %}
+    <h1>Edit PlayerLvl</h1>
+
+    {{ include('player_lvl/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('player_lvl_index') }}">back to list</a>
+
+    {{ include('player_lvl/_delete_form.html.twig') }}
+{% endblock %}

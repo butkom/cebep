@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<title>PlayerChamp</title>
+
+{% block body %}
+    <h1>PlayerChamp</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ player_champ.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ player_champ.date ? player_champ.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('player_champ_index') }}">back to list</a>
+
+    <a href="{{ path('player_champ_edit', {'id': player_champ.id}) }}">edit</a>
+
+    {{ include('player_champ/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<title>GuildChamp</title>
+
+{% block body %}
+    <h1>GuildChamp</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ guild_champ.id }}</td>
+            </tr>
+            <tr>
+                <th>Place</th>
+                <td>{{ guild_champ.place }}</td>
+            </tr>
+            <tr>
+                <th>Comment</th>
+                <td>{{ guild_champ.comment }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('guild_champ_index') }}">back to list</a>
+
+    <a href="{{ path('guild_champ_edit', {'id': guild_champ.id}) }}">edit</a>
+
+    {{ include('guild_champ/_delete_form.html.twig') }}
+{% endblock %}

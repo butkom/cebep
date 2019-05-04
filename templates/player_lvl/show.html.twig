@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<title>PlayerLvl</title>
+
+{% block body %}
+    <h1>PlayerLvl</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ player_lvl.id }}</td>
+            </tr>
+            <tr>
+                <th>Lvl</th>
+                <td>{{ player_lvl.lvl }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ player_lvl.date ? player_lvl.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('player_lvl_index') }}">back to list</a>
+
+    <a href="{{ path('player_lvl_edit', {'id': player_lvl.id}) }}">edit</a>
+
+    {{ include('player_lvl/_delete_form.html.twig') }}
+{% endblock %}

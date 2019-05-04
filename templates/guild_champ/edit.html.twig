@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit GuildChamp</title>
+
+{% block body %}
+    <h1>Edit GuildChamp</h1>
+
+    {{ include('guild_champ/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('guild_champ_index') }}">back to list</a>
+
+    {{ include('guild_champ/_delete_form.html.twig') }}
+{% endblock %}
