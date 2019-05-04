@@ -22,26 +22,65 @@ class PlayerChamp extends Editable
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="player_id", type="integer")
-     */
-    private $playerId;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="champ_id", type="integer")
-     */
-    private $champId;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Player", inversedBy="playerChamps")
+     * @ORM\JoinColumn(name="player_id", referencedColumnName="id")
+     */
+    private $player;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Champ", inversedBy="playerChamps")
+     * @ORM\JoinColumn(name="champ_id", referencedColumnName="id")
+     */
+    private $champ;
+
+
+    /**
+     * @param Champ $champ
+     *
+     * @return PlayerChamp
+     */
+    public function setChamp($champ)
+    {
+        $this->champ = $champ;
+
+        return $this;
+    }
+
+    /**
+     * @return Champ
+     */
+    public function getChamp()
+    {
+        return $this->champ;
+    }
+
+    /**
+     * @param Player $player
+     *
+     * @return PlayerChamp
+     */
+    public function setPlayer($player)
+    {
+        $this->player = $player;
+
+        return $this;
+    }
+
+    /**
+     * @return Player
+     */
+    public function getPlayer()
+    {
+        return $this->player;
+    }
 
     /**
      * Get id
@@ -51,54 +90,6 @@ class PlayerChamp extends Editable
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set playerId
-     *
-     * @param integer $playerId
-     *
-     * @return PlayerChamp
-     */
-    public function setPlayerId($playerId)
-    {
-        $this->playerId = $playerId;
-
-        return $this;
-    }
-
-    /**
-     * Get playerId
-     *
-     * @return int
-     */
-    public function getPlayerId()
-    {
-        return $this->playerId;
-    }
-
-    /**
-     * Set champId
-     *
-     * @param integer $champId
-     *
-     * @return PlayerChamp
-     */
-    public function setChampId($champId)
-    {
-        $this->champId = $champId;
-
-        return $this;
-    }
-
-    /**
-     * Get champId
-     *
-     * @return int
-     */
-    public function getChampId()
-    {
-        return $this->champId;
     }
 
     /**
@@ -125,4 +116,3 @@ class PlayerChamp extends Editable
         return $this->date;
     }
 }
-

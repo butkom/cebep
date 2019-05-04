@@ -41,10 +41,16 @@ class Champ extends Editable
      */
     private $guildChamps;
 
+    /**
+     * @ORM\OneToMany(targetEntity="PlayerChamp", mappedBy="champ")
+     */
+    private $playerChamps;
+
 
     public function __construct()
     {
         $this->guildChamps = new ArrayCollection();
+        $this->playerChamps = new ArrayCollection();
     }
 
     /**

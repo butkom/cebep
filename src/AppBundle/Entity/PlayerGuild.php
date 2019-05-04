@@ -22,20 +22,6 @@ class PlayerGuild extends Editable
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="player_id", type="integer")
-     */
-    private $playerId;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="guild_id", type="integer")
-     */
-    private $guildId;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
@@ -58,7 +44,7 @@ class PlayerGuild extends Editable
     /**
      * Set guild
      *
-     * @param integer $guild
+     * @param Guild $guild
      *
      * @return PlayerGuild
      */
@@ -80,7 +66,7 @@ class PlayerGuild extends Editable
     }
 
     /**
-     * @param integer $player
+     * @param Player $player
      *
      * @return PlayerGuild
      */
@@ -107,54 +93,6 @@ class PlayerGuild extends Editable
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set playerId
-     *
-     * @param integer $playerId
-     *
-     * @return PlayerGuild
-     */
-    public function setPlayerId($playerId)
-    {
-        $this->playerId = $playerId;
-
-        return $this;
-    }
-
-    /**
-     * Get playerId
-     *
-     * @return int
-     */
-    public function getPlayerId()
-    {
-        return $this->playerId;
-    }
-
-    /**
-     * Set guildId
-     *
-     * @param integer $guildId
-     *
-     * @return PlayerGuild
-     */
-    public function setGuildId($guildId)
-    {
-        $this->guildId = $guildId;
-
-        return $this;
-    }
-
-    /**
-     * Get guildId
-     *
-     * @return int
-     */
-    public function getGuildId()
-    {
-        return $this->guildId;
     }
 
     /**

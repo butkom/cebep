@@ -24,13 +24,6 @@ class PlayerLvl extends Editable
     /**
      * @var int
      *
-     * @ORM\Column(name="player_id", type="integer")
-     */
-    private $playerId;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="lvl", type="integer")
      */
     private $lvl;
@@ -49,7 +42,7 @@ class PlayerLvl extends Editable
     private $player;
 
     /**
-     * @param integer $player
+     * @param Player $player
      *
      * @return PlayerLvl
      */
@@ -76,30 +69,6 @@ class PlayerLvl extends Editable
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set playerId
-     *
-     * @param integer $playerId
-     *
-     * @return PlayerLvl
-     */
-    public function setPlayerId($playerId)
-    {
-        $this->playerId = $playerId;
-
-        return $this;
-    }
-
-    /**
-     * Get playerId
-     *
-     * @return int
-     */
-    public function getPlayerId()
-    {
-        return $this->playerId;
     }
 
     /**

@@ -49,7 +49,7 @@ class PlayerName extends Editable
     private $player;
 
     /**
-     * @param integer $player
+     * @param Player $player
      *
      * @return PlayerName
      */
@@ -61,7 +61,7 @@ class PlayerName extends Editable
     }
 
     /**
-     * @return int
+     * @return Player
      */
     public function getPlayer()
     {

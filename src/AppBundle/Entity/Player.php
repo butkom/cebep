@@ -64,12 +64,17 @@ class Player extends Editable
      */
     private $playerGuilds;
 
+    /**
+     * @ORM\OneToMany(targetEntity="PlayerChamp", mappedBy="player")
+     */
+    private $playerChamps;
 
     public function __construct()
     {
         $this->playerLvls = new ArrayCollection();
         $this->playerNames = new ArrayCollection();
         $this->playerGuilds = new ArrayCollection();
+        $this->playerChamps = new ArrayCollection();
     }
 
     /**

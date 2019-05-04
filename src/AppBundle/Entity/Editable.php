@@ -17,7 +17,7 @@ class Editable
 
 
     /**
-     * @param integer $editor
+     * @param User $editor
      *
      * @return Editable
      */

@@ -59,9 +59,7 @@ class GuildChamp extends Editable
     }
 
     /**
-     * Set guild
-     *
-     * @param integer $guild
+     * @param Guild $guild
      *
      * @return GuildChamp
      */
@@ -73,9 +71,7 @@ class GuildChamp extends Editable
     }
 
     /**
-     * Get guild
-     *
-     * @return int
+     * @return Guild
      */
     public function getGuild()
     {
@@ -83,9 +79,7 @@ class GuildChamp extends Editable
     }
 
     /**
-     * Set champ
-     *
-     * @param integer $champ
+     * @param Champ $champ
      *
      * @return GuildChamp
      */
@@ -97,9 +91,7 @@ class GuildChamp extends Editable
     }
 
     /**
-     * Get champ
-     *
-     * @return int
+     * @return Champ
      */
     public function getChamp()
     {
@@ -154,4 +146,3 @@ class GuildChamp extends Editable
         return $this->comment;
     }
 }
-

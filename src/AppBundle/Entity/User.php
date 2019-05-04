@@ -41,6 +41,33 @@ class User extends BaseUser
         $this->players = new ArrayCollection();
     }
 
+    public function getPlayers(): ArrayCollection
+    {
+        return $this->players;
+    }
+
+    public function addPlayer(Player $player): self
+    {
+        if (!$this->players->contains($player)) {
+            $this->players[] = $player;
+            $player->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlayer(Player $player): self
+    {
+        if ($this->players->contains($player)) {
+            $this->players->removeElement($player);
+
+            if ($player->getUser() === $this) {
+                $player->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 
     /**
      * Get id
