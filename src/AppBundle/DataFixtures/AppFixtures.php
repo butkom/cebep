@@ -70,16 +70,8 @@ class AppFixtures extends Fixture implements ORMFixtureInterface
             $guild->setShortName('PRM');
             $guild->setServer('S036');
             $guild->setEditor($user);
+            $guild->addPlayer($player);
             $manager->persist($guild);
-            $manager->flush();
-        }
-        {
-            $playerGuild = new Entity\PlayerGuild();
-            $playerGuild->setPlayer($player);
-            $playerGuild->setGuild($guild);
-            $playerGuild->setDate(\DateTime::createFromFormat('j M Y', '27 April 2019'));
-            $playerGuild->setEditor($user);
-            $manager->persist($playerGuild);
             $manager->flush();
         }
         {

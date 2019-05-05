@@ -48,16 +48,73 @@ class Guild extends Editable
      */
     private $guildChamps;
 
+
+
+
     /**
-     * @ORM\OneToMany(targetEntity="PlayerGuild", mappedBy="guild")
+     * @ORM\ManyToMany(targetEntity="Player", mappedBy="guilds")
      */
-    private $playerGuilds;
+    private $players;
 
 
     public function __construct()
     {
         $this->guildChamps = new ArrayCollection();
-        $this->playerGuilds = new ArrayCollection();
+        $this->players = new ArrayCollection();
+    }
+
+
+    public function getGuildChamp()
+    {
+        return $this->guildChamps;
+    }
+
+    public function addGuildChamp(GuildChamp $guildChamp): self
+    {
+        if (!$this->guildChamps->contains($guildChamp)) {
+            $this->guildChamps[] = $guildChamp;
+            $guildChamp->setGuild($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGuildChamp(GuildChamp $guildChamp): self
+    {
+        if ($this->guildChamps->contains($guildChamp)) {
+            $this->guildChamps->removeElement($guildChamp);
+
+            if ($guildChamp->getGuild() === $this) {
+                $guildChamp->setGuild(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPlayers()
+    {
+        return $this->players;
+    }
+
+    public function addPlayer(Player $player)
+    {
+        if ($this->players->contains($player)) {
+            return;
+        }
+        $this->players->add($player);
+        $player->addGuild($this);
+    }
+    /**
+     * @param Player $player
+     */
+    public function removePlayer(Player $player)
+    {
+        if (!$this->players->contains($player)) {
+            return;
+        }
+        $this->players->removeElement($player);
+        $player->removeGuild($this);
     }
 
     /**
