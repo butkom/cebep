@@ -15,4 +15,11 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+/web/build/
 /dev_notes.md
+/.bash_history
+/.cache/
+/.composer/
+/.idea/
+/.yarnrc
+/node_modules/

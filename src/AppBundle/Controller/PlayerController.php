@@ -21,6 +21,7 @@ class PlayerController extends Controller
      */
     public function index(): Response
     {
+        /** @var PlayerRepository $repository */
         $repository = $this->getDoctrine()->getManager()->getRepository(Player::class);
 
         return $this->render('player/index.html.twig', [

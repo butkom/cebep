@@ -60,9 +60,20 @@ class Player extends Editable
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="PlayerGuild", mappedBy="player")
+     *
+     * @ORM\ManyToMany(targetEntity="Guild", inversedBy="players")
+     * @ORM\JoinTable(
+     *  name="player_guild",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="player_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="guild_id", referencedColumnName="id")
+     *  }
+     * )
      */
-    private $playerGuilds;
+    protected $guilds;
+
 
     /**
      * @ORM\OneToMany(targetEntity="PlayerChamp", mappedBy="player")
@@ -73,8 +84,121 @@ class Player extends Editable
     {
         $this->playerLvls = new ArrayCollection();
         $this->playerNames = new ArrayCollection();
-        $this->playerGuilds = new ArrayCollection();
+        $this->guilds = new ArrayCollection();
         $this->playerChamps = new ArrayCollection();
+    }
+
+    public function getPlayerChamps()
+    {
+        return $this->playerChamps;
+    }
+
+    public function addPlayerChamp(PlayerChamp $playerChamp): self
+    {
+        if (!$this->playerChamps->contains($playerChamp)) {
+            $this->playerChamps[] = $playerChamp;
+            $playerChamp->setPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlayerChamp(PlayerChamp $playerChamp): self
+    {
+        if ($this->playerChamps->contains($playerChamp)) {
+            $this->playerChamps->removeElement($playerChamp);
+
+            if ($playerChamp->getPlayer() === $this) {
+                $playerChamp->setPlayer(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    public function getGuilds()
+    {
+        return $this->guilds;
+    }
+
+    /**
+     * @param Guild $guild
+     */
+    public function addGuild(Guild $guild)
+    {
+        if ($this->guilds->contains($guild)) {
+            return;
+        }
+        $this->guilds->add($guild);
+        $guild->addPlayer($this);
+    }
+    /**
+     * @param Guild $guild
+     */
+    public function removeGuild(Guild $guild)
+    {
+        if (!$this->guilds->contains($guild)) {
+            return;
+        }
+        $this->guilds->removeElement($guild);
+        $guild->removePlayer($this);
+    }
+
+    public function getPlayerNames()
+    {
+        return $this->playerNames;
+    }
+
+    public function addPlayerName(PlayerName $playerName): self
+    {
+        if (!$this->playerNames->contains($playerName)) {
+            $this->playerNames[] = $playerName;
+            $playerName->setPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlayerName(PlayerName $playerName): self
+    {
+        if ($this->playerNames->contains($playerName)) {
+            $this->playerNames->removeElement($playerName);
+
+            if ($playerName->getPlayer() === $this) {
+                $playerName->setPlayer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPlayerLvls()
+    {
+        return $this->playerLvls;
+    }
+
+    public function addPlayerLvl(PlayerLvl $playerLvl): self
+    {
+        if (!$this->playerLvls->contains($playerLvl)) {
+            $this->playerLvls[] = $playerLvl;
+            $playerLvl->setPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlayerLvl(PlayerLvl $playerLvl): self
+    {
+        if ($this->playerLvls->contains($playerLvl)) {
+            $this->playerLvls->removeElement($playerLvl);
+
+            if ($playerLvl->getPlayer() === $this) {
+                $playerLvl->setPlayer(null);
+            }
+        }
+
+        return $this;
     }
 
     /**

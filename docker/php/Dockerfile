@@ -1,7 +1,15 @@
 FROM php:7.2-fpm
 
-# Install recommended extensions for Symfony
 RUN apt-get update && apt-get install -y \
+    apt-transport-https \
+    gnupg
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get update && apt-get install -y \
+        yarn \
+        nodejs \
         libicu-dev \
         git \
     && docker-php-ext-install \
@@ -15,15 +23,17 @@ RUN apt-get update && apt-get install -y \
     && mv composer.phar /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer
 
+RUN yarn add \
+        bootstrap \
+        popper.js \
+        jquery \
+        @symfony/webpack-encore \
+        sass-loader@^7.0.1 \
+        node-sass \
+    --dev
+
 RUN pecl install xdebug-2.6.0RC2
 RUN docker-php-ext-enable xdebug
-RUN echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/xdebug.ini
-RUN echo "display_startup_errors = On" >> /usr/local/etc/php/conf.d/xdebug.ini
-RUN echo "display_errors = On" >> /usr/local/etc/php/conf.d/xdebug.ini
-RUN echo "xdebug.remote_enable=1" >> /usr/local/etc/php/conf.d/xdebug.ini
-RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/xdebug.ini
-RUN echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/xdebug.ini
-RUN echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/xdebug.ini
 
 # Permission fix
 RUN usermod -u 1000 www-data
