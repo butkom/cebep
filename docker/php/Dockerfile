@@ -28,6 +28,8 @@ RUN yarn add \
         popper.js \
         jquery \
         @symfony/webpack-encore \
+        sass-loader@^7.0.1 \
+        node-sass \
     --dev
 
 RUN pecl install xdebug-2.6.0RC2
