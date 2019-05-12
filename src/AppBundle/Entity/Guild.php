@@ -41,7 +41,7 @@ class Guild extends Editable
      *
      * @ORM\Column(name="server", type="string", length=5)
      */
-    private $server;
+    private $server = 'S032';
 
     /**
      * @ORM\OneToMany(targetEntity="GuildChamp", mappedBy="guild")
