@@ -14,9 +14,8 @@ class PlayerType extends AbstractType
         $builder
             ->add('inGameId')
             ->add('characteristic')
-            ->add('absentDays')
-            ->add('user')
-            ->add('editor')
+            ->add('name')
+            ->add('lvl')
         ;
     }
 

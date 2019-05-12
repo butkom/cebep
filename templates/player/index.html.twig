@@ -64,7 +64,6 @@
             <tr>
                 <th>InGameId</th>
                 <th>Characteristic</th>
-                <th>AbsentDays</th>
                 <th>Lvl</th>
                 <th>Nickname</th>
                 <th>Guild</th>
@@ -76,28 +75,11 @@
                 <tr>
                     <td>{{ player.inGameId }}</td>
                     <td>{{ player.characteristic }}</td>
-                    <td>{{ player.absentDays }}</td>
-                    <th>
-                        {% for playerLvl in player.playerLvls %}
-                            {{ playerLvl.lvl }}
-                        {% endfor %}
-                    </th>
-                    <th>
-                        <ul>
-                            {% for playerName in player.playerNames %}
-                                <li class="history-list">{{ playerName.name }}</li>
-                            {% endfor %}
-                        </ul>
-                    </th>
-                    <th>
-                        <ul>
-                        {% for guild in player.guilds %}
-                            <li class="history-list">{{ guild.name }}</li>
-                        {% endfor %}
-                        </ul>
-                    </th>
+                    <th>{{ player.lvl }}</th>
+                    <th>{{ player.name }}</th>
+                    <th>{{ player.guilds.first.name }}</th>
                     <td>
-                        <a href="{{ path('player_show', {'id': player.id}) }}">show</a>
+                        <a href="{{ path('player_show', {'id': player.id}) }}">detail</a>
                         <a href="{{ path('player_edit', {'id': player.id}) }}">edit</a>
                     </td>
                 </tr>
