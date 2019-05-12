@@ -77,7 +77,11 @@
                     <td>{{ player.characteristic }}</td>
                     <th>{{ player.lvl }}</th>
                     <th>{{ player.name }}</th>
-                    <th>{{ player.guilds.first.name }}</th>
+                    <th>
+                        {% if player.guilds.count > 0 %}
+                            {{ player.guilds.first.getName() }}
+                        {% endif %}
+                    </th>
                     <td>
                         <a href="{{ path('player_show', {'id': player.id}) }}">detail</a>
                         <a href="{{ path('player_edit', {'id': player.id}) }}">edit</a>
