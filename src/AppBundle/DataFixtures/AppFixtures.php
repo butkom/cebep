@@ -28,40 +28,16 @@ class AppFixtures extends Fixture implements ORMFixtureInterface
             $player = new Entity\Player();
             $player->setUser($user);
             $player->setInGameId('1003878');
-            $player->setCharacteristic('Лидер гильдии');
+            $player->setCharacteristic('Глава гильдии');
             $player->setEditor($user);
+            $player->setName('Румпельштиль');
+            $player->setLvl(95);
+
             $manager->persist($player);
             $manager->flush();
 
             $user->addPlayer($player);
             $manager->persist($user);
-            $manager->flush();
-        }
-        {
-            $playerLvl = new Entity\PlayerLvl();
-            $playerLvl->setPlayer($player);
-            $playerLvl->setLvl(92);
-            $playerLvl->setDate(\DateTime::createFromFormat('j M Y', '27 April 2019'));
-            $playerLvl->setEditor($user);
-            $manager->persist($playerLvl);
-            $manager->flush();
-        }
-        {
-            $playerName = new Entity\PlayerName();
-            $playerName->setPlayer($player);
-            $playerName->setName('Kharkov');
-            $playerName->setDate(\DateTime::createFromFormat('j M Y', '27 October 2018'));
-            $playerName->setEditor($user);
-            $manager->persist($playerName);
-            $manager->flush();
-        }
-        {
-            $playerName = new Entity\PlayerName();
-            $playerName->setPlayer($player);
-            $playerName->setName('Румпельштиль');
-            $playerName->setDate(\DateTime::createFromFormat('j M Y', '27 April 2019'));
-            $playerName->setEditor($user);
-            $manager->persist($playerName);
             $manager->flush();
         }
         {
@@ -79,6 +55,7 @@ class AppFixtures extends Fixture implements ORMFixtureInterface
             $champ->setDate(\DateTime::createFromFormat('j M Y', '27 April 2019'));
             $champ->setComment('Мы продули хменам');
             $champ->setEditor($user);
+            $champ->setType('all');
             $manager->persist($champ);
             $manager->flush();
         }
