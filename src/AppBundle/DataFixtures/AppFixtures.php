@@ -42,6 +42,14 @@ class AppFixtures extends Fixture implements ORMFixtureInterface
         }
         {
             $guild = new Entity\Guild();
+            $guild->setName('');
+            $guild->setShortName('');
+            $guild->setServer('');
+            $manager->persist($guild);
+            $manager->flush();
+        }
+        {
+            $guild = new Entity\Guild();
             $guild->setName('Север');
             $guild->setShortName('PRM');
             $guild->setServer('S036');
