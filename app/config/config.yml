@@ -32,6 +32,7 @@ framework:
         log: true
     templating:
         engines: ['twig']
+    translator: { fallbacks: ['%locale%'] }
 
 # Twig Configuration
 twig:
@@ -93,3 +94,9 @@ assetic:
   use_controller: '%kernel.debug%'
   filters:
     cssrewrite: ~
+
+sonata_block:
+  default_contexts: [cms]
+  blocks:
+    sonata.admin.block.admin_list:
+      contexts:   [admin]

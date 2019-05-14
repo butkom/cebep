@@ -6,9 +6,17 @@ use AppBundle\Entity;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\ORMFixtureInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture implements ORMFixtureInterface
 {
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         {
@@ -18,8 +26,8 @@ class AppFixtures extends Fixture implements ORMFixtureInterface
             $user->setEmail('higher@ro.ru');
             $user->setEmailCanonical('higher@ro.ru');
             $user->setEnabled(1);
-            $user->setPassword('$2y$13$MwrItHCxJxcgI0beGpazIu1RUK73/cvZAOBvZf7.azirEnU7siJhu');
-            $user->setRoles([]);
+            $user->setPassword($this->encoder->encodePassword($user, 'higher@ro.ru'));
+            $user->setRoles(['ROLE_SUPER_ADMIN']);
             $user->setNickname('Румпельштиль');
             $manager->persist($user);
             $manager->flush();
