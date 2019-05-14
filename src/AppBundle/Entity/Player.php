@@ -84,6 +84,25 @@ class Player extends Editable
     }
 
     /**
+     * @return Guild|null
+     */
+    public function getGuild(): ?Guild
+    {
+        return $this->getGuilds()->first();
+    }
+
+    /**
+     * @param Guild $guild
+     * @return Player
+     */
+    public function setGuild(Guild $guild): self
+    {
+        $this->addGuild($guild);
+
+        return $this;
+    }
+
+    /**
      * Set name
      *
      * @param string $name
@@ -134,7 +153,6 @@ class Player extends Editable
 
         return $this;
     }
-
 
     public function getGuilds()
     {
