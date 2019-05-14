@@ -32,3 +32,9 @@ services:
     AppBundle\DataFixtures\:
         resource: '../../src/AppBundle/DataFixtures'
         tags: ['doctrine.fixture.orm']
+
+    admin.player:
+        class: AppBundle\Admin\PlayerAdmin
+        arguments: [~, AppBundle\Entity\Player, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Player }
