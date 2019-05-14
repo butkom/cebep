@@ -72,19 +72,7 @@
             {% for guild in guilds %}
                 <tr>
                     <td>{{ guild.name }}</td>
-                    <td>
-                        <ul>
-                            {% for player in guild.players %}
-                                <li>
-                                    <ul>
-                                        {% for playerNames in player.playerNames %}
-                                            <li>{{ playerNames.name }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </td>
+                    <td>{{ guild.players.count }}</td>
                     <td>{{ guild.shortName }}</td>
                     <td>{{ guild.server }}</td>
                     <td>

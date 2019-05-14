@@ -15,7 +15,6 @@ class GuildType extends AbstractType
             ->add('name')
             ->add('shortName')
             ->add('server')
-            ->add('editor')
         ;
     }
 

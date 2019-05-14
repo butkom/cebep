@@ -37,27 +37,24 @@ class Player extends Editable
     private $characteristic;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="absent_days", type="integer", nullable=true)
-     */
-    private $absentDays;
-
-    /**
-     * @ORM\OneToMany(targetEntity="PlayerLvl", mappedBy="player")
-     */
-    private $playerLvls;
-
-    /**
-     * @ORM\OneToMany(targetEntity="PlayerName", mappedBy="player")
-     */
-    private $playerNames;
-
-    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="players")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=50)
+     */
+    private $name;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="lvl", type="integer")
+     */
+    private $lvl;
 
     /**
      *
@@ -82,10 +79,32 @@ class Player extends Editable
 
     public function __construct()
     {
-        $this->playerLvls = new ArrayCollection();
-        $this->playerNames = new ArrayCollection();
         $this->guilds = new ArrayCollection();
         $this->playerChamps = new ArrayCollection();
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Player
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     public function getPlayerChamps()
@@ -145,60 +164,28 @@ class Player extends Editable
         $guild->removePlayer($this);
     }
 
-    public function getPlayerNames()
+    /**
+     * Set lvl
+     *
+     * @param integer $lvl
+     *
+     * @return Player
+     */
+    public function setLvl($lvl)
     {
-        return $this->playerNames;
-    }
-
-    public function addPlayerName(PlayerName $playerName): self
-    {
-        if (!$this->playerNames->contains($playerName)) {
-            $this->playerNames[] = $playerName;
-            $playerName->setPlayer($this);
-        }
+        $this->lvl = $lvl;
 
         return $this;
     }
 
-    public function removePlayerName(PlayerName $playerName): self
+    /**
+     * Get lvl
+     *
+     * @return int
+     */
+    public function getLvl()
     {
-        if ($this->playerNames->contains($playerName)) {
-            $this->playerNames->removeElement($playerName);
-
-            if ($playerName->getPlayer() === $this) {
-                $playerName->setPlayer(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getPlayerLvls()
-    {
-        return $this->playerLvls;
-    }
-
-    public function addPlayerLvl(PlayerLvl $playerLvl): self
-    {
-        if (!$this->playerLvls->contains($playerLvl)) {
-            $this->playerLvls[] = $playerLvl;
-            $playerLvl->setPlayer($this);
-        }
-
-        return $this;
-    }
-
-    public function removePlayerLvl(PlayerLvl $playerLvl): self
-    {
-        if ($this->playerLvls->contains($playerLvl)) {
-            $this->playerLvls->removeElement($playerLvl);
-
-            if ($playerLvl->getPlayer() === $this) {
-                $playerLvl->setPlayer(null);
-            }
-        }
-
-        return $this;
+        return $this->lvl;
     }
 
     /**
@@ -271,16 +258,6 @@ class Player extends Editable
         $this->absentDays = $absentDays;
 
         return $this;
-    }
-
-    /**
-     * Get absentDays
-     *
-     * @return int
-     */
-    public function getAbsentDays()
-    {
-        return $this->absentDays;
     }
 
     /**

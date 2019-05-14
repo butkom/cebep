@@ -13,6 +13,13 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Champ extends Editable
 {
+    const TYPES = [
+        'all' => 'all',
+        'intelligence-agility' => 'intelligence-agility',
+        'intelligence-strength' => 'intelligence-strength',
+        'agility-strength' => 'agility-strength',
+    ];
+
     /**
      * @var int
      *
@@ -35,6 +42,12 @@ class Champ extends Editable
      * @ORM\Column(name="comment", type="text", nullable=true)
      */
     private $comment;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    private $type;
 
     /**
      * @ORM\OneToMany(targetEntity="GuildChamp", mappedBy="champ")
@@ -110,5 +123,32 @@ class Champ extends Editable
     {
         return $this->comment;
     }
-}
 
+    /**
+     * Set type
+     *
+     * @param string $ype
+     *
+     * @return Champ
+     */
+    public function setType($ype)
+    {
+        if (!in_array($ype, static::TYPES)) {
+            throw new \InvalidArgumentException("Invalid type");
+        }
+
+        $this->type = $ype;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+}
