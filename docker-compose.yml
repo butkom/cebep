@@ -1,37 +1,53 @@
-version: '2'
+version: '3.3'
+
+networks:
+  cebep:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${NETWORK}
+
 services:
   php:
     build: ./docker/php/
     environment:
+      XDEBUG_CONFIG: remote_host=${PHP_CEBEP_IPV4} idekey=PHPSTORM remote_enable=1
+      PHP_IDE_CONFIG: serverName=cebep
       TIMEZONE: Europe/Kiev
     volumes:
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini:ro
       - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
       - ./:/var/www
     working_dir: /var/www
+    networks:
+      cebep:
+        ipv4_address: 172.20.0.10
 
   nginx:
     image: nginx:1.11
     depends_on:
       - php
-    volumes_from:
-      - php
     volumes:
       - ./docker/nginx/app.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
-      - 80:80
+      - ${NGINX_PORT}:80
+      - ${NGINX_PORT_SSL}:443
+    networks:
+      cebep:
+        ipv4_address: 172.20.0.11
 
   mysql:
     image: mysql:5.7
-    volumes_from:
-      - mysqldata
     ports:
-      - "3306:3306"
+      - ${MYSQL_PORT}:3306
     environment:
-      - MYSQL_DATABASE=cebep
-      - MYSQL_USER=dev
-      - MYSQL_PASSWORD=devpass
-      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    networks:
+      cebep:
+        ipv4_address: 172.20.0.13
 
   mysqldata:
     image: debian:jessie
