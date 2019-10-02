@@ -93,3 +93,20 @@ assetic:
   use_controller: '%kernel.debug%'
   filters:
     cssrewrite: ~
+
+nelmio_api_doc:
+  documentation:
+    host: http://localhost
+    schemes: [http, https]
+    info:
+      title: My App
+      description: This is an awesome app!
+      version: 1.0.0
+    securityDefinitions:
+      Bearer:
+        type: apiKey
+        description: 'Value: Bearer {jwt}'
+        name: Authorization
+        in: header
+    security:
+      - Bearer: []

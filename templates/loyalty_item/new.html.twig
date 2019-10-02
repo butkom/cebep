@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New LoyaltyItem{% endblock %}
+
+{% block body %}
+    <h1>Create new LoyaltyItem</h1>
+
+    {{ include('loyalty_item/_form.html.twig') }}
+
+    <a href="{{ path('loyalty_item_index') }}">back to list</a>
+{% endblock %}
