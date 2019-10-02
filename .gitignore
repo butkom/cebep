@@ -23,3 +23,4 @@
 /.idea/
 /.yarnrc
 /node_modules/
+/.env
