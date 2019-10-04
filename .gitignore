@@ -18,6 +18,7 @@
 /.env.local.php
 /.env.*.local
 /public/bundles/
+/public/build/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###

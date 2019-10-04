@@ -1,0 +1,8 @@
+nelmio_api_doc:
+    documentation:
+        host: localhost
+        schemes: [http, https]
+        info:
+            title: Cebep
+            description: This is an awesome app!
+            version: 1.0.0
